@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Prompt Tester</title>
+  <meta charset="UTF-8" />
+  <title>Prompt Redirect</title>
 </head>
 <body>
   <script>
-    // Get the 'prompt' parameter from the URL
     const params = new URLSearchParams(window.location.search);
     const prompt = params.get('prompt');
 
@@ -14,13 +13,16 @@
       document.body.innerText = '❌ Missing "prompt" in URL.';
     } else {
       const decoded = decodeURIComponent(prompt);
-      document.body.innerText = '✅ Prompt received and returned:\n\n' + decoded;
+      const returnUrl = `niharika://return?prompt=${encodeURIComponent(decoded)}`;
 
-      // Send the prompt back using a link (for Shortcuts to access if needed)
-      const returnLink = document.createElement('a');
-      returnLink.href = `niharika://return?prompt=${encodeURIComponent(decoded)}`;
-      returnLink.innerText = '\n\n👉 Tap here to return prompt to Shortcut';
-      document.body.appendChild(returnLink);
+      // Show message for debug (optional)
+      document.body.innerHTML = `<p>✅ Prompt received: <b>${decoded}</b></p>
+        <p>🔁 Redirecting to:<br><code>${returnUrl}</code></p>`;
+
+      // Auto-redirect after short delay
+      setTimeout(() => {
+        window.location.href = returnUrl;
+      }, 1000); // Wait 1 sec to let user see something
     }
   </script>
 </body>
