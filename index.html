@@ -2,20 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Prompt Tester</title>
+  <title>Static Prompt</title>
 </head>
 <body>
-    <a id="text"></a>
+  Prompt: Hello, this is your AI assistant. Let's begin your journey.
 </body>
-  <script>
-    // Get the 'prompt' parameter from the URL
-    const params = new URLSearchParams(window.location.search);
-    const prompt = params.get('prompt');
-
-    if (!prompt) {
-      document.getElementById('text').innerText = '❌ Missing "prompt" in URL.';
-    } else {
-      document.getElementById('text').innerText = '✅ Prompt received:\n\n' + decodeURIComponent(prompt);
-    }
-  </script>
 </html>
