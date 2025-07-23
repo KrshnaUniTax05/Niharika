@@ -5,24 +5,23 @@
   <title>Prompt Tester</title>
 </head>
 <body>
-  <!-- We use simple server-side logic via query string, simulated manually -->
-  <!-- This gets replaced on GitHub Pages as-is, so we do it manually below -->
-  <!-- This will show something no matter what -->
+  <script>
+    // Get the 'prompt' parameter from the URL
+    const params = new URLSearchParams(window.location.search);
+    const prompt = params.get('prompt');
 
-  <!-- Displayed by default -->
-  <pre>
-✅ Prompt received:
+    if (!prompt) {
+      document.body.innerText = '❌ Missing "prompt" in URL.';
+    } else {
+      const decoded = decodeURIComponent(prompt);
+      document.body.innerText = '✅ Prompt received and returned:\n\n' + decoded;
 
-<!-- The actual prompt will appear here -->
-<script>
-  const params = new URLSearchParams(window.location.search);
-  const prompt = params.get('prompt');
-  if (prompt) {
-    document.write(decodeURIComponent(prompt));
-  } else {
-    document.write("❌ Missing 'prompt' in URL.");
-  }
-</script>
-</pre>
+      // Send the prompt back using a link (for Shortcuts to access if needed)
+      const returnLink = document.createElement('a');
+      returnLink.href = `niharika://return?prompt=${encodeURIComponent(decoded)}`;
+      returnLink.innerText = '\n\n👉 Tap here to return prompt to Shortcut';
+      document.body.appendChild(returnLink);
+    }
+  </script>
 </body>
 </html>
