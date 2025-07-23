@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Prompt Redirect</title>
+  <meta charset="UTF-8">
+  <title>Prompt Reader</title>
 </head>
 <body>
   <script>
@@ -13,16 +13,8 @@
       document.body.innerText = '❌ Missing "prompt" in URL.';
     } else {
       const decoded = decodeURIComponent(prompt);
-      const returnUrl = `niharika://return?prompt=${encodeURIComponent(decoded)}`;
-
-      // Show message for debug (optional)
-      document.body.innerHTML = `<p>✅ Prompt received: <b>${decoded}</b></p>
-        <p>🔁 Redirecting to:<br><code>${returnUrl}</code></p>`;
-
-      // Auto-redirect after short delay
-      setTimeout(() => {
-        window.location.href = returnUrl;
-      }, 1000); // Wait 1 sec to let user see something
+      // Set plain text as body content (not HTML) so Shortcuts can read it
+      document.body.innerText = `✅ Prompt: ${decoded}`;
     }
   </script>
 </body>
