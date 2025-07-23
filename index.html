@@ -2,20 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Prompt Reader</title>
+  <title>Prompt Tester</title>
 </head>
 <body>
+    <div id="text"></div>
+</body>
   <script>
+    // Get the 'prompt' parameter from the URL
     const params = new URLSearchParams(window.location.search);
     const prompt = params.get('prompt');
 
     if (!prompt) {
-      document.body.innerText = '❌ Missing "prompt" in URL.';
+      document.getElementById('text').innerText = '❌ Missing "prompt" in URL.';
     } else {
-      const decoded = decodeURIComponent(prompt);
-      // Set plain text as body content (not HTML) so Shortcuts can read it
-      document.body.innerText = `✅ Prompt: ${decoded}`;
+      document.getElementById('text').innerText = '✅ Prompt received:\n\n' + decodeURIComponent(prompt);
     }
   </script>
-</body>
 </html>
