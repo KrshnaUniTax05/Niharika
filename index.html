@@ -5,16 +5,24 @@
   <title>Prompt Tester</title>
 </head>
 <body>
-  <script>
-    // Get the 'prompt' parameter from the URL
-    const params = new URLSearchParams(window.location.search);
-    const prompt = params.get('prompt');
+  <!-- We use simple server-side logic via query string, simulated manually -->
+  <!-- This gets replaced on GitHub Pages as-is, so we do it manually below -->
+  <!-- This will show something no matter what -->
 
-    if (!prompt) {
-      document.body.innerText = '❌ Missing "prompt" in URL.';
-    } else {
-      document.body.innerText = '✅ Prompt received:\n\n' + decodeURIComponent(prompt);
-    }
-  </script>
+  <!-- Displayed by default -->
+  <pre>
+✅ Prompt received:
+
+<!-- The actual prompt will appear here -->
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const prompt = params.get('prompt');
+  if (prompt) {
+    document.write(decodeURIComponent(prompt));
+  } else {
+    document.write("❌ Missing 'prompt' in URL.");
+  }
+</script>
+</pre>
 </body>
 </html>
